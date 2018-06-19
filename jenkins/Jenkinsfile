@@ -3,17 +3,20 @@ pipeline {
         docker {
             image 'maven:3-alpine'
             args '-v /root/.m2:/root/.m2'
+            echo 'Docker step'
         }
     }
     stages {
         stage('Build') {
             steps {
                 bat 'mvn -B -DskipTests clean package'
+                echo 'Build step'
             }
         }
         stage('Test') {
             steps {
                 bat 'mvn test'
+                echo 'test step'
             }
             post {
                 always {
